@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+
+        .container{
+            display: grid;
+            grid-template-columns: 24% 74%;
+           
+          
+
+        }
+     .gridF{
+            display: grid;
+            width: 90%;
+        grid-template-columns: 32% 32% 32%;
+        row-gap: 5%;
+        column-gap: 1%;
+         
+      
+        
+    }
+    .gridF>div{
+        /* display: grid; */
+        width: 90%;
+        grid-template-columns: 15% 15% 15% 15% 15% 15%;
+         grid-template-rows: 8%;
+     
+         column-gap: 1%;
+         row-gap: 2%;
+    }
+    .gridF>div>div{
+        border: 1px solid black;
+        height: 5vh;
+    }
+    .gridF>div>button{
+        height: 30px;
+     
+    }
+    </style>
+</head>
+<body>
+    <div class ="container">
+    <form id="myForm">
+        Name:<input type="text" id="name"><br><br>
+        Price:<input type="number" id="price"><br><br>
+        Category:<input type="text" id="category"><br><br>
+        Dileveryday:<input type="number" id="day"><br><br>
+        Description:<input type="text" id="discription"><br><br>
+        <input type="submit" value="Add Product">
+       
+    </form>
+  
+     <div class="gridF">
+
+     </div>
+
+    </div>
+</body>
+
+<script>
+    let form = document.getElementById('myForm')
+    form.addEventListener('submit',Myformdata);
+   
+ 
+   let productarray = []
+   let id = 0;
+   let Maingrid = document.querySelector('.gridF')
+    function Myformdata(event){
+      
+       
+
+        event.preventDefault()
+        let obj = {
+            name:document.getElementById('name').value,
+            price:document.getElementById('price').value,
+            category:document.getElementById('category').value,
+            Estimated:document.getElementById('day').value,
+            Description:document.getElementById('discription').value
+        }
+       
+    
+            id = id +1
+           
+            
+            let div1 = document.createElement('div')
+          
+
+            div1.innerHTML = `<div id=${id}>${obj.name}</div><div id=${id}>${obj.price}</div><div id=${id}>${obj.category}</div><div id=${id}>${obj.Estimated}</div><div id=${id}>${obj.Description}</div><button onclick="Remove(${id})">Remove</button><button onclick="Update(${id}${obj.price})">Update</button>`
+
+            Maingrid.appendChild(div1)
+
+
+           
+        
+    }
+
+    function Remove(id){
+          let div = document.getElementById(id)
+          let parent = div.parentElement;
+          parent.remove()
+    }
+
+    function Update(id,obj){
+        let new_price = prompt(`${id}`)
+        console.log(new_price,obj)
+             
+          let div1 = document.createElement('div')
+          
+
+          div1.innerHTML = `<div id=${id}>${obj.name}</div><div id=${id}>${new_price}</div><div id=${id}>${obj.category}</div><div id=${id}>${obj.Estimated}</div><div id=${id}>${obj.Description}</div><button onclick="Remove(${id})">Remove</button><button onclick="Update(${id})">Update</button>`
+
+          Maingrid.appendChild(div1)
+         
+    }
+   
+</script>
+</html>
